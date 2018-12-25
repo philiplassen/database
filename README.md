@@ -8,3 +8,6 @@ Many modern databases are implemented in C++ and C. Both of these languages I ha
 Luckily I do not begin the Thesis phase of my master's program at the University of Copenhagen until 2020. So I am being proactive :). 
 
 
+## Phase 1
+I will be working through the Database implementation tutorial https://cstack.github.io/db_tutorial/. The tutorial is in C. Thus I will get familiar with the basics of implementing database and improve my C!
+
