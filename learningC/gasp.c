@@ -1,9 +1,32 @@
+#include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-void fileParse(char *string, char *fileName) {
+void find(char *string, char *line, int argI, int argN, int lineNumber) {
+  char cmp[strlen(string)];
+  int j; 
+  for (j = 0; j < strlen(string); j++) {
+    if (argI) {
+      cmp[j] = tolower(string[j]);
+    } else {
+      cmp[j] = string[j];
+    }
+  }
+  int s;
+  int i;
+  if (strstr(line, cmp) != NULL) {
+    if (argN) {
+      printf("%d:", lineNumber);
+    }
+    printf("%s", line);
+  }
+}
+
+  
+
+void fileParse(char *string, char *fileName, int argI, int argN) {
   FILE *input_file;
   input_file = fopen(fileName, "r");
   int line = 0;
@@ -11,11 +34,12 @@ void fileParse(char *string, char *fileName) {
     printf("File does not Exist\n");
     exit(1);
   }
-  printf("The contencts of the file %s are : \n", fileName);
-  char ch;
-  while ((ch = fgetc(input_file)) != EOF) {
-    printf("%c", ch);
+  char str[100];
+  while (fgets(str, 100, input_file) != NULL) {
+    line += 1;
+    find(string, str, argI, argN, line);
   }
+
   fclose(input_file);
 }
 
@@ -62,7 +86,7 @@ int main(int argc, char* argv[]) {
     return 0;
   }
 
-  fileParse(argv[i-1], argv[i]);
+  fileParse(argv[i-1], argv[i], argI, argN);
 
   printf("The String provided was %s\n", argv[i]);
   return 0;
